@@ -64,7 +64,7 @@ Lint
     
     使用 ``from x import y`` , 其中x是包前缀, y是不带前缀的模块名.
     
-    使用 ``from x import y as z``, 如果两个要导入的模块都叫做z或者y太长了.
+    使用 ``from x import y as z``, 如果两个要导入的模块都叫做y或者y太长了.
     
     例如, 模块 ``sound.effects.echo`` 可以用如下方式导入:
     
@@ -565,7 +565,7 @@ True/False的求值
     如果好处很显然, 就明智而谨慎的使用装饰器   
     
 定义:
-    `用于函数及方法的装饰器 <http://www.python.org/doc/2.4.3/whatsnew/node6.html>`_ (也就是@标记). 最常见的装饰器是@classmethod 和@staticmethod, 用于将常规函数转换成类方法或静态方法. 不过, 装饰器语法也允许用户自定义装饰器. 特别地, 对于某个函数 ``my_decorator`` , 下面的两段代码是等效的:
+    `用于函数及方法的装饰器 <https://docs.python.org/release/2.4.3/whatsnew/node6.html>`_ (也就是@标记). 最常见的装饰器是@classmethod 和@staticmethod, 用于将常规函数转换成类方法或静态方法. 不过, 装饰器语法也允许用户自定义装饰器. 特别地, 对于某个函数 ``my_decorator`` , 下面的两段代码是等效的:
     
     .. code-block:: python
     

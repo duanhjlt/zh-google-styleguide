@@ -37,6 +37,19 @@ Google 用了很多自己实现的技巧 / 工具使 C++ 代码更加健壮, 我
     * 某些极端情况下，所有权被共享的对象永远不会被销毁，比如引用死循环（cyclic references）。
     * 智能指针并不能够完全代替原生指针。
 
+决定：
+
+    如果必须使用动态分配，倾向于保持分配者的所有权。如果其他地方要使用这个对象，最好传递它的拷贝，或者传递一个不用改变所有权的指针或引用。倾向于使用 ``std::unique_ptr`` 来明确所有权传递，例如：
+    
+    .. code-block:: c++
+    
+        std::unique_ptr<Foo> FooFactory();
+        void FooConsumer(std::unique_ptr<Foo> ptr);
+        
+    避免使用共享所有权。如果对性能要求很高，并且操作的对象是不可变的（比如说 ``std::shared_ptr<const Foo>`` ），这时可以用共享所有权来避免昂贵的拷贝操作。如果确实要使用共享所有权，倾向于使用 ``std::shared_ptr`` 。
+    
+    不要在新代码中使用 ``scoped_ptr `` ，除非你必须兼容老版本的C++。总是用 ``std::unique_ptr`` 代替 ``std::auto_ptr`` 。
+
 4.2. cpplint
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -46,7 +59,7 @@ Google 用了很多自己实现的技巧 / 工具使 C++ 代码更加健壮, 我
 
 ``cpplint.py`` 是一个用来分析源文件, 能检查出多种风格错误的工具. 它不并完美, 甚至还会漏报和误报, 但它仍然是一个非常有用的工具. 在行尾加 ``// NOLINT``, 或在上一行加 ``// NOLINTNEXTLINE``, 可以忽略报错。
 
-某些项目会指导你如何使用他们的项目工具运行 ``cpplint.py``. 如果你参与的项目没有提供, 你可以单独下载 `cpplint.py <http://google-styleguide.googlecode.com/svn/trunk/cpplint/cpplint.py>`_.
+某些项目会指导你如何使用他们的项目工具运行 ``cpplint.py``. 如果你参与的项目没有提供, 你可以单独下载 `cpplint.py <http://github.com/google/styleguide/blob/gh-pages/cpplint/cpplint.py>`_.
 
 
 译者（acgtyrant）笔记
